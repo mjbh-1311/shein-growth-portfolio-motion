@@ -19,7 +19,7 @@ async function rewriteAssetPaths(directory) {
 
     const source = await readFile(path, 'utf8');
     const assetPrefix = extension === '.css' ? '../assets/' : 'assets/';
-    const prepared = source.replaceAll('/assets/', assetPrefix);
+    const prepared = source.replace(/(?<!\.)\/assets\//g, assetPrefix);
     if (prepared !== source) await writeFile(path, prepared);
   }
 }
